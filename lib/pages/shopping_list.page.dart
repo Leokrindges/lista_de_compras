@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:lista_de_compras/models/shopping_list.model.dart';
 
 class ShoppingListPage extends StatelessWidget {
-  const ShoppingListPage({super.key});
+  final List<ShoppingList> shoppingList = [
+    // ShoppingList(name: 'Lista 1'),
+    // ShoppingList(name: 'Lista 2'),
+    // ShoppingList(name: 'Lista 3'),
+  ];
+  ShoppingListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,21 +19,63 @@ class ShoppingListPage extends StatelessWidget {
         child: Icon(Icons.add),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Image.asset(
-              'assets/images/lista-de-compras.png',
-              width: 150,
-              height: 150,
-            ),
-            SizedBox(height: 20),
-            Center(child: Text('Crie sua primeira lista')),
-            Center(child: Text('Toque no botão azul')),
-          ],
-        ),
+        padding: const EdgeInsets.all(10.0),
+        child: shoppingList.isNotEmpty
+            ? ListView.builder(
+                itemCount: shoppingList.length,
+                itemBuilder: (ctx, index) {
+                  return Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  shoppingList[index].name,
+                                  style: TextStyle(fontSize: 14),
+                                ),
+                                Text(
+                                  "0/0",
+                                  style: TextStyle(
+                                    color: Colors.green,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 20),
+                            LinearProgressIndicator(
+                              value: 0.0,
+                              backgroundColor: Colors.grey,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                Colors.green,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              )
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Image.asset(
+                    'assets/images/lista-de-compras.png',
+                    width: 100,
+                    height: 100,
+                  ),
+                  SizedBox(height: 16),
+                  Text('Crie sua primeira lista', textAlign: TextAlign.center),
+                  Text('Toque no botão azul', textAlign: TextAlign.center),
+                ],
+              ),
       ),
     );
   }

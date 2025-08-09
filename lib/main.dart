@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const ShoppingListPage(),
+      home: ShoppingListPage(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lista_de_compras/models/shopping_list.model.dart';
+import 'package:lista_de_compras/pages/add_list.page.dart';
 
 class ShoppingListPage extends StatelessWidget {
   final List<ShoppingList> shoppingList = [
@@ -12,9 +13,20 @@ class ShoppingListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Minhas listas'), centerTitle: true),
+      appBar: AppBar(
+        title: Text('Minhas listas'),
+        centerTitle: true,
+        actions: [
+          Icon(Icons.diamond, color: Colors.yellow[700], size: 30),
+          SizedBox(width: 16),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(
+            context,
+          ).push(MaterialPageRoute(builder: (context) => AddListPage()));
+        },
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(99)),
         child: Icon(Icons.add),
       ),

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:lista_de_compras/models/shopping_list.model.dart';
-import 'package:lista_de_compras/pages/add_list.page.dart';
+import 'package:lista_de_compras/pages/add_list_product.page.dart';
+import 'package:lista_de_compras/pages/add_shopping_list.page.dart';
 
-class ShoppingListPage extends StatelessWidget {
-  final List<ShoppingList> shoppingList = [
-    // ShoppingList(name: 'Lista 1'),
-    // ShoppingList(name: 'Lista 2'),
-    // ShoppingList(name: 'Lista 3'),
-  ];
-  ShoppingListPage({super.key});
+class ShoppingListPage extends StatefulWidget {
+  const ShoppingListPage({super.key});
+
+  @override
+  State<ShoppingListPage> createState() => _ShoppingListPageState();
+}
+
+class _ShoppingListPageState extends State<ShoppingListPage> {
+  final List<ShoppingList> shoppingList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +25,16 @@ class ShoppingListPage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(
-            context,
-          ).push(MaterialPageRoute(builder: (context) => AddListPage()));
+        onPressed: () async {
+          final resultado = await Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => AddShoppingListPage()),
+          );
+
+          if (resultado != null) {
+            setState(() {
+              shoppingList.add(ShoppingList(name: resultado));
+            });
+          }
         },
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(99)),
         child: Icon(Icons.add),
@@ -36,10 +45,11 @@ class ShoppingListPage extends StatelessWidget {
             ? ListView.builder(
                 itemCount: shoppingList.length,
                 itemBuilder: (ctx, index) {
+                  final shopping = shoppingList[index];
                   return Card(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Padding(
+                    child: ListTile(
+                      contentPadding: EdgeInsets.all(10.0),
+                      title: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Column(
                           children: [
@@ -47,7 +57,7 @@ class ShoppingListPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  shoppingList[index].name,
+                                  shopping.name,
                                   style: TextStyle(fontSize: 14),
                                 ),
                                 Text(
@@ -70,6 +80,13 @@ class ShoppingListPage extends StatelessWidget {
                           ],
                         ),
                       ),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AddListProduct(),
+                          ),
+                        );
+                      },
                     ),
                   );
                 },

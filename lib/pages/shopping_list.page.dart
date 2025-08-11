@@ -83,7 +83,8 @@ class _ShoppingListPageState extends State<ShoppingListPage> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => AddListProduct(),
+                            builder: (context) =>
+                                AddListProduct(products: shopping.products),
                           ),
                         );
                       },

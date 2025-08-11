@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:lista_de_compras/models/product.model.dart';
+import 'package:lista_de_compras/widgets/add_product.widget.dart';
 
 class AddListProduct extends StatefulWidget {
-  const AddListProduct({super.key});
+  final List<Product> products;
+
+  const AddListProduct({super.key, required this.products});
 
   @override
   State<AddListProduct> createState() => _AddListProductState();
 }
 
 class _AddListProductState extends State<AddListProduct> {
-  final List<Product> products = [
-    Product(name: 'Arroz', price: 5.00),
-    Product(name: 'Feijão', price: 4.50),
-    Product(name: 'Macarrão', price: 3.00),
-    Product(name: 'Óleo', price: 6.00),
-    Product(name: 'Açúcar', price: 2.50),
-    Product(name: 'Sal', price: 1.00),
-  ];
+  void addProduct() async {
+    final newProduct = await showModalBottomSheet<Product>(
+      context: context,
+      builder: (ctx) => AddProduct(),
+    );
+
+    if (newProduct != null) {
+      setState(() {
+        widget.products.add(newProduct);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +52,9 @@ class _AddListProductState extends State<AddListProduct> {
             Flexible(
               child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: products.length,
+                itemCount: widget.products.length,
                 itemBuilder: (ctx, index) {
-                  final product = products[index];
+                  final product = widget.products[index];
                   return Row(
                     children: [
                       Transform.scale(
@@ -116,7 +123,7 @@ class _AddListProductState extends State<AddListProduct> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: addProduct,
         label: const Text('Adicionar'),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       ),

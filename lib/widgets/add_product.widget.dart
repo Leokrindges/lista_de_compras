@@ -17,9 +17,11 @@ class _AddProductState extends State<AddProduct> {
   addProduct() {
     if (!formKey.currentState!.validate()) return;
 
+    String priceText = priceController.text.replaceAll(',', '.');
+
     final product = Product(
       name: nameController.text,
-      price: double.tryParse(priceController.text) ?? 0,
+      price: double.tryParse(priceText) ?? 0,
     );
 
     Navigator.of(context).pop(product);
@@ -72,6 +74,7 @@ class _AddProductState extends State<AddProduct> {
             TextFormField(
               key: ValueKey('inputValue'),
               controller: priceController,
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
               decoration: InputDecoration(
                 hintText: 'R\$ 0,00',
                 border: InputBorder.none,

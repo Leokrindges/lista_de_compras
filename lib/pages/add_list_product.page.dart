@@ -99,7 +99,7 @@ class _AddListProductState extends State<AddListProduct> {
                       ),
                       Spacer(),
                       Text(
-                        'R\$ ${product.price}',
+                        'R\$ ${product.price.toStringAsFixed(2)}',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w400,

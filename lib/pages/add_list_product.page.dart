@@ -44,9 +44,12 @@ class _AddListProductState extends State<AddListProduct> {
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Text(
-              'Atualizar',
-              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+            child: GestureDetector(
+              onTap: () {},
+              child: Text(
+                'Atualizar',
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+              ),
             ),
           ),
         ],

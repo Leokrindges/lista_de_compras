@@ -46,6 +46,15 @@ class _ShoppingListPageState extends State<ShoppingListPage> {
                 itemCount: shoppingList.length,
                 itemBuilder: (ctx, index) {
                   final shopping = shoppingList[index];
+                  final products = shopping.products;
+                  final totalProducts = products.length;
+                  final checkedProducts = products
+                      .where((p) => p.isChecked)
+                      .length;
+                  final progress = totalProducts > 0
+                      ? checkedProducts / totalProducts
+                      : 0.0;
+
                   return Card(
                     child: ListTile(
                       contentPadding: EdgeInsets.all(10.0),
@@ -61,7 +70,7 @@ class _ShoppingListPageState extends State<ShoppingListPage> {
                                   style: TextStyle(fontSize: 14),
                                 ),
                                 Text(
-                                  "0/0",
+                                  "$checkedProducts/$totalProducts",
                                   style: TextStyle(
                                     color: Colors.green,
                                     fontSize: 14,
@@ -71,7 +80,7 @@ class _ShoppingListPageState extends State<ShoppingListPage> {
                             ),
                             SizedBox(height: 20),
                             LinearProgressIndicator(
-                              value: 0.0,
+                              value: progress,
                               backgroundColor: Colors.grey,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                 Colors.green,
@@ -80,13 +89,14 @@ class _ShoppingListPageState extends State<ShoppingListPage> {
                           ],
                         ),
                       ),
-                      onTap: () {
-                        Navigator.of(context).push(
+                      onTap: () async {
+                        await Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) =>
                                 AddListProduct(products: shopping.products),
                           ),
                         );
+                        setState(() {});
                       },
                     ),
                   );

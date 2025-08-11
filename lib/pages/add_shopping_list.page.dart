@@ -33,6 +33,7 @@ class _AddShoppingListPageState extends State<AddShoppingListPage> {
               children: [
                 SizedBox(),
                 TextFormField(
+                  key: ValueKey('listNameInput'),
                   controller: nome,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -52,6 +53,7 @@ class _AddShoppingListPageState extends State<AddShoppingListPage> {
                   child: Row(
                     children: [
                       CustomButton(
+                        key: ValueKey('backToListBtn'),
                         text: 'Voltar',
                         onTap: () {
                           Navigator.pop(context);
@@ -60,6 +62,7 @@ class _AddShoppingListPageState extends State<AddShoppingListPage> {
                       ),
                       SizedBox(width: 16),
                       CustomButton(
+                        key: ValueKey('createListBtn'),
                         text: 'Criar',
                         onTap: () {
                           addShopping();

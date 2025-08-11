@@ -45,6 +45,7 @@ class _AddListProductState extends State<AddListProduct> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: GestureDetector(
+              key: ValueKey('updateListBtn'),
               onTap: () {},
               child: Text(
                 'Atualizar',
@@ -75,6 +76,7 @@ class _AddListProductState extends State<AddListProduct> {
                       Transform.scale(
                         scale: 1.5,
                         child: Checkbox(
+                          key: ValueKey('productCheckbox'),
                           value: product.isChecked,
                           onChanged: (value) {
                             setState(() {
@@ -138,6 +140,7 @@ class _AddListProductState extends State<AddListProduct> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
+        key: ValueKey('addNewItemBtn'),
         onPressed: addProduct,
         label: const Text('Adicionar'),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),

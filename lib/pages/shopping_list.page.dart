@@ -17,7 +17,7 @@ class _ShoppingListPageState extends State<ShoppingListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Minhas listas'),
+        title: Text('Minhas listas', key: ValueKey('appBarTitle')),
         centerTitle: true,
         actions: [
           Icon(Icons.diamond, color: Colors.yellow[700], size: 30),
@@ -25,6 +25,7 @@ class _ShoppingListPageState extends State<ShoppingListPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        key: ValueKey('addListBtn'),
         onPressed: () async {
           final resultado = await Navigator.of(context).push(
             MaterialPageRoute(builder: (context) => AddShoppingListPage()),
@@ -56,6 +57,7 @@ class _ShoppingListPageState extends State<ShoppingListPage> {
                       : 0.0;
 
                   return Card(
+                    key: ValueKey('shoppingListCard'),
                     child: ListTile(
                       contentPadding: EdgeInsets.all(10.0),
                       title: Padding(
@@ -107,6 +109,7 @@ class _ShoppingListPageState extends State<ShoppingListPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Image.asset(
+                    key: ValueKey('emptyListImage'),
                     'assets/images/lista-de-compras.png',
                     width: 100,
                     height: 100,

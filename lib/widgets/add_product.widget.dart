@@ -56,6 +56,7 @@ class _AddProductState extends State<AddProduct> {
             ),
             Divider(color: Colors.grey, thickness: 1),
             TextFormField(
+              key: ValueKey('inputItem'),
               controller: nameController,
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -69,6 +70,7 @@ class _AddProductState extends State<AddProduct> {
               ),
             ),
             TextFormField(
+              key: ValueKey('inputValue'),
               controller: priceController,
               decoration: InputDecoration(
                 hintText: 'R\$ 0,00',
@@ -80,6 +82,7 @@ class _AddProductState extends State<AddProduct> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(
+                  key: ValueKey('addItemBtn'),
                   onPressed: addProduct,
                   child: Text(
                     'Adicionar',

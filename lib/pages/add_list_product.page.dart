@@ -12,6 +12,18 @@ class AddListProduct extends StatefulWidget {
 }
 
 class _AddListProductState extends State<AddListProduct> {
+  double calcTotalChecked() {
+    return widget.products
+        .where((product) => product.isChecked)
+        .fold(0.0, (sum, product) => sum + product.price);
+  }
+
+  double calcTotalUnchecked() {
+    return widget.products
+        .where((product) => !product.isChecked)
+        .fold(0.0, (sum, product) => sum + product.price);
+  }
+
   void addProduct() async {
     final newProduct = await showModalBottomSheet<Product>(
       context: context,
@@ -101,7 +113,7 @@ class _AddListProductState extends State<AddListProduct> {
                     children: [
                       Text('Não Marcados'),
                       Text(
-                        'R\$ 0.00',
+                        'R\$ ${calcTotalUnchecked().toStringAsFixed(2)}',
                         style: TextStyle(color: Colors.blue, fontSize: 16),
                       ),
                     ],
@@ -111,7 +123,7 @@ class _AddListProductState extends State<AddListProduct> {
                     children: [
                       Text('Marcados'),
                       Text(
-                        'R\$ 0.00',
+                        'R\$ ${calcTotalChecked().toStringAsFixed(2)}',
                         style: TextStyle(color: Colors.green, fontSize: 16),
                       ),
                     ],

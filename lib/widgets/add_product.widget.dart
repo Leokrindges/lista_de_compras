@@ -70,12 +70,6 @@ class _AddProductState extends State<AddProduct> {
             ),
             TextFormField(
               controller: priceController,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Campo é obrigatório.';
-                }
-                return null;
-              },
               decoration: InputDecoration(
                 hintText: 'R\$ 0,00',
                 border: InputBorder.none,

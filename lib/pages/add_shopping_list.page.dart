@@ -53,7 +53,7 @@ class _AddShoppingListPageState extends State<AddShoppingListPage> {
                   child: Row(
                     children: [
                       CustomButton(
-                        key: ValueKey('backToListBtn'),
+                        key: ValueKey('backToListsBtn'),
                         text: 'Voltar',
                         onTap: () {
                           Navigator.pop(context);
